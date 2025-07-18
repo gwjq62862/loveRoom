@@ -1,4 +1,4 @@
-<!DOCTYPE html >
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -59,6 +59,34 @@
             margin-right: 10px;
         }
 
+        @keyframes rotateSlow {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .animate-rotate-slow {
+            animation: rotateSlow 4s linear infinite;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
         @keyframes spin {
             0% {
                 transform: rotate(0deg);
@@ -81,12 +109,24 @@
 
     <div id="landscape-warning">
         <div class="warning-content">
-            <div class="rotate-icon"></div>
-            <h1>Love</h1>
-            <h1>Tinh Cầu</h1>
-            <p style="font-size: 0.6em;">happy your day</p>
-            <p style="font-size: 0.6em;">Die with smile</p>
-            <div class="stars-bg"></div>
+            <div class="flex flex-col items-center justify-center text-white space-y-4 animate-fade-in">
+                <!-- Phone Icon -->
+                <div class="relative w-20 h-32 border-4 border-white rounded-xl flex items-center justify-center">
+                    <div class="w-8 h-8 bg-white rounded-md"></div>
+                </div>
+
+                <!-- Rotating Arrow -->
+                <div class="w-8 h-8 text-white animate-rotate-slow">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 4v5h.582M4 4a9 9 0 0115.916-2.916M4 4L15 15" />
+                    </svg>
+                </div>
+
+                <!-- Text -->
+                <p class="text-sm text-center px-4">Please rotate your phone to landscape mode</p>
+            </div>
+
         </div>
     </div>
 
