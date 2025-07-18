@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="./DEV303.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-  <!-- Importmap for THREE.js -->
   <script type="importmap">
     {
       "imports": {
@@ -21,46 +20,7 @@
     }
   </script>
 
-  <!-- Custom Animations -->
   <style>
-    @keyframes rotateSlow {
-      0% {
-        transform: rotate(0deg);
-      }
-
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
-
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-
-    .animate-rotate-slow {
-      animation: rotateSlow 4s linear infinite;
-    }
-
-    .animate-fade-in {
-      animation: fadeIn 1s ease-out forwards;
-    }
-
     .text-white {
       color: white !important;
     }
@@ -97,42 +57,81 @@
       animation: spin 1s linear infinite;
       margin-right: 10px;
     }
+
+    @keyframes rotateSlow {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .animate-rotate-slow {
+      animation: rotateSlow 4s linear infinite;
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 1s ease-out forwards;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
   </style>
 </head>
 
-<body class="bg-black text-white">
+<body class="bg-black">
 
-  <!-- 3D Canvas -->
   <div id="container"></div>
 
-  <!-- Landscape Warning -->
-  <div id="landscape-warning" class="fixed inset-0 bg-black bg-opacity-90 text-white hidden items-center justify-center z-[9999]">
-    <div class="flex flex-col items-center space-y-6 animate-fade-in">
+  <!-- Landscape Orientation Warning -->
+  <div id="landscape-warning"
+    class="fixed inset-0 bg-black bg-opacity-95 text-white hidden items-center justify-center z-[9999]">
+    <div class="flex flex-col items-center space-y-6 text-center animate-fade-in">
+
       <!-- Phone Icon -->
-      <div class="relative w-24 h-40 border-4 border-white rounded-2xl flex items-center justify-center">
-        <div class="w-10 h-10 bg-white rounded-md"></div>
+      <div class="relative w-24 h-40 border-4 border-white rounded-2xl shadow-lg flex items-center justify-center">
+        <div class="w-10 h-10 bg-white rounded-md shadow-md"></div>
       </div>
 
-      <!-- Rotating Arrow -->
+      <!-- Rotating Arrow Icon -->
       <div class="w-10 h-10 text-white animate-rotate-slow">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 4v1m0 14v1m8-8h1M4 12H3m15.364-6.364l.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707" />
         </svg>
       </div>
 
-      <!-- Message -->
-      <div class="text-center px-6">
-        <h2 class="text-lg font-semibold">Rotate Your Device</h2>
-        <p class="text-sm text-gray-200">This experience is best viewed in landscape mode</p>
+      <!-- Text Message -->
+      <div class="px-6">
+        <h2 class="text-xl font-bold">Rotate Your Device</h2>
+        <p class="text-sm text-gray-300 mt-1">For the best experience, please switch to landscape mode.</p>
       </div>
+
     </div>
   </div>
 
-  <!-- Optional overlays -->
   <div id="dark-overlay"></div>
   <div id="info"></div>
 
-  <!-- Global Data -->
   <script>
     window.dataLove2Loveloom = {
       template: "galaxy",
@@ -141,12 +140,25 @@
         ringTexts: ["CHỖ NÀY ĐẶT TÊN CHO VÀNH ĐAI"],
       }
     };
+
+    function checkOrientation() {
+      const isPortrait = window.innerHeight > window.innerWidth;
+      const warning = document.getElementById("landscape-warning");
+      if (isPortrait) {
+        warning.classList.remove("hidden");
+      } else {
+        warning.classList.add("hidden");
+      }
+    }
+
+    window.addEventListener("resize", checkOrientation);
+    window.addEventListener("orientationchange", checkOrientation);
+    window.addEventListener("load", checkOrientation);
   </script>
 
-  <!-- Your 3D JavaScript -->
   <script type="module" src="./script.js"></script>
 
-  <!-- Music Manager -->
+  <!-- Khởi tạo Music Manager -->
   <script>
     const musicManager = {
       audio: null,
@@ -205,24 +217,6 @@
       audioStarted = true;
     });
   </script>
-
-  <!-- Orientation Check Script -->
-  <script>
-    function checkOrientation() {
-      const isPortrait = window.innerHeight > window.innerWidth;
-      const warning = document.getElementById("landscape-warning");
-      if (isPortrait) {
-        warning.classList.remove("hidden");
-      } else {
-        warning.classList.add("hidden");
-      }
-    }
-
-    window.addEventListener("resize", checkOrientation);
-    window.addEventListener("orientationchange", checkOrientation);
-    window.addEventListener("load", checkOrientation);
-  </script>
-
 </body>
 
 </html>
